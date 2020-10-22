@@ -8,6 +8,7 @@ Created on Tue Oct 20 10:40:54 2020
 Server Code file:
 Eva focused on server to ESP
 Jessica focused on server to app
+url: https://pnat-server.herokuapp.com/
 """
 
 from flask import Flask, session, request
@@ -39,14 +40,23 @@ def data():
 # Current status of button with optional parameter 'button' to specify a push
 @app.route('/app')
 def button_info():
-    button_pressed = bool(request.args.get('button', default = False))
+    global button_pressed
+    button_parameter = request.args.get('button')
+    if button_parameter is None:
+        return "button status is " + str(button_pressed)
+    
+    button_pressed = bool(request.args.get('button'))
     return "button status is " + str(button_pressed)
 
 
 # Current status of ESP with optional parameter 'light' to specify an on/off
 @app.route('/esp')
 def light_info():
-    light_on = bool(request.args.get('light', default = False))
+    global light_on
+    light_parameter = request.args.get('light')
+    if light_parameter is None:
+        return "light status is " + str(light_on)
+    light_on = bool(request.args.get('light'))
     return "light status is " + str(light_on)
 
 
