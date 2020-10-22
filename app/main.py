@@ -37,6 +37,8 @@ def welcome_home():
 @app.route('/data')
 def data():
     with lock:
+        global button_pressed
+        global light_on
         return f"Button is {button_pressed} and light is {light_on}"
 
 
