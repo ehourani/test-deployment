@@ -55,10 +55,13 @@ def button_info():
 def light_info():
     global light_on
     light_parameter = request.args.get('light')
+
     if light_parameter is None:
         return "light status is " + str(light_on)
     
-    light_on = bool(request.args.get('light'))
+    true_strings = ['true', 'True', '1']
+
+    light_on = True if light_parameter in true_strings else False
     return "light status is " + str(light_on)
 
 
