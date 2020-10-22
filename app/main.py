@@ -18,7 +18,7 @@ app.secret_key = "bo7YMBYR7MYq4o7"
 
 # Global Variables
 button_pressed = False
-light_on = False 
+light_on = False
 
 
 ########################################
@@ -45,7 +45,8 @@ def button_info():
     if button_parameter is None:
         return "button status is " + str(button_pressed)
     
-    button_pressed = bool(request.args.get('button'))
+    if button_parameter:
+        button_pressed = False if button_pressed else True
     return "button status is " + str(button_pressed)
 
 
@@ -56,6 +57,7 @@ def light_info():
     light_parameter = request.args.get('light')
     if light_parameter is None:
         return "light status is " + str(light_on)
+    
     light_on = bool(request.args.get('light'))
     return "light status is " + str(light_on)
 
